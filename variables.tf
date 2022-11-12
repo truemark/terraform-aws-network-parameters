@@ -1,10 +1,10 @@
 variable "name" {
-  description = "Network name"
+  description = "Network name. This is usually the name of your VPC"
   type = string
 }
 
 variable "prefix" {
-  description = "Prefix to use on created parameters."
+  description = "Prefix from which to store and retrieve parameters"
   type = string
   default = "/network"
 }
@@ -16,7 +16,7 @@ variable "vpc_id" {
 }
 
 variable "azs" {
-  description = "Availability zones for this network"
+  description = "Availability zones for this network. ex. [\"us-west-2a\", \"us-west-2b\"]"
   type = list(string)
   default = null
 }
