@@ -113,3 +113,11 @@ output "public_alb_arns" {
 output "private_alb_arns" {
   value = (var.create && var.private_alb_arns != null) ? var.private_alb_arns : local.private_alb_arns
 }
+
+output "public_alb_certificate_arns" {
+  value = (var.create && var.public_alb_certificate_arns != null) ? var.public_alb_certificate_arns : local.public_alb_certificate_arns
+}
+
+output "private_alb_certificate_arns" {
+  value = (var.create && var.private_alb_certificate_arns != null) ? var.private_alb_certificate_arns : local.private_alb_certificate_arns
+}

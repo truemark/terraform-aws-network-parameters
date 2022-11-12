@@ -70,7 +70,19 @@ variable "public_alb_arns" {
 }
 
 variable "private_alb_arns" {
-  description = "Private ALB ARNs in this network "
+  description = "Private ALB ARNs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "public_alb_certificate_arns" {
+  description = "Certificate ARNs on public ALBs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "private_alb_certificate_arns" {
+  description = "Certificate ARNs on private ALBs in this network"
   type = list(string)
   default = null
 }

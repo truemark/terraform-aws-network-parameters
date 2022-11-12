@@ -17,6 +17,8 @@ the parameter store for other automation and applications to use.
       public_subnet_ids = module.vpc.public_subnets
       private_alb_arns = [module.private_alb1.lb_arn, module.private_alb2.lb_arn]
       public_alb_arns = [module.public_alb1.lb_arn, module.public_alb2.lb_arn]
+      public_alb_certificate_arns = [module.public_alb1.certificate_arn, module.public_alb2.certificate_arn]
+      public_alb_certificate_arns = [module.private_alb1.certificate_arn, module.private_alb2.certificate_arn]
     }
 
 Other automation which needs to reference these values may use this same

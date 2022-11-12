@@ -17,6 +17,8 @@ locals {
   outpost_subnets_path = "${local.path}/outpost_subnets"
   public_albs_path = "${local.path}/public_albs"
   private_albs_path = "${local.path}/private_albs"
+  public_alb_certificates_path = "${local.path}/public_alb_certificates"
+  private_alb_certificates_path = "${local.path}/private_alb_certificates"
 }
 
 resource "aws_ssm_parameter" "vpc" {
@@ -107,6 +109,22 @@ resource "aws_ssm_parameter" "private_albs" {
   tags = local.tags
 }
 
+resource "aws_ssm_parameter" "public_alb_certificates" {
+  count = var.create && var.public_alb_certificate_arns != null ? 1 : 0
+  name  = local.public_alb_certificates_path
+  type  = "StringList"
+  value = join(",", var.public_alb_certificate_arns)
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "private_alb_certificates" {
+  count = var.create && var.private_alb_certificate_arns != null ? 1 : 0
+  name  = local.private_alb_certificates_path
+  type = "StringList"
+  value = join(",", var.private_alb_certificate_arns)
+  tags = local.tags
+}
+
 data "aws_ssm_parameters_by_path" "this" {
   path = local.path
 }
@@ -127,4 +145,6 @@ locals {
   outpost_subnet_ids = try(split(",", local.parameter_map[local.outpost_subnets_path]), null)
   public_alb_arns = try(split(",", local.parameter_map[local.public_albs_path]), null)
   private_alb_arns = try(split(",", local.parameter_map[local.private_albs_path]), null)
+  public_alb_certificate_arns = try(split(",", local.parameter_map[local.public_alb_certificates_path]), null)
+  private_alb_certificate_arns = try(split(",", local.parameter_map[local.private_alb_certificates_path]), null)
 }
