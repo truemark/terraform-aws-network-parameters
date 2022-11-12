@@ -12,6 +12,7 @@ variable "prefix" {
 variable "vpc_id" {
   description = "ID of the VPC for this network"
   type = string
+  default = null
 }
 
 variable "azs" {
@@ -20,25 +21,25 @@ variable "azs" {
   default = null
 }
 
-variable "public_subnets" {
+variable "public_subnet_ids" {
   description = "Public subnet IDs in this network"
   type = list(string)
   default = null
 }
 
-variable "private_subnets" {
+variable "private_subnet_ids" {
   description = "Private subnets IDs in this network"
   type = list(string)
   default = null
 }
 
-variable "public_albs" {
+variable "public_alb_arns" {
   description = "Public ALB ARNs in this network"
   type = list(string)
   default = null
 }
 
-variable "private_albs" {
+variable "private_alb_arns" {
   description = "Private ALB ARNs in this network "
   type = list(string)
   default = null
