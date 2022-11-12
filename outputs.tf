@@ -1,13 +1,13 @@
 output "vpc_parameter_name" {
-  value = aws_ssm_parameter.vpc.name
+  value = join("", aws_ssm_parameter.vpc.*.name)
 }
 
 output "vpc_parameter_id" {
-  value = aws_ssm_parameter.vpc.id
+  value = join("", aws_ssm_parameter.vpc.*.id)
 }
 
 output "vpc_parameter_arn" {
-  value = aws_ssm_parameter.vpc.arn
+  value = join("", aws_ssm_parameter.vpc.*.arn)
 }
 
 output "az_parameter_names" {

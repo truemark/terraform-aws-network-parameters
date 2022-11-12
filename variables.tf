@@ -55,3 +55,9 @@ variable "suppress_tagging" {
   type = bool
   default = false
 }
+
+variable "create" {
+  description = "Set to false to disable creation of resources in this module."
+  type = bool
+  default = true
+}
