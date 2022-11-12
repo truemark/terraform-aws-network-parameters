@@ -1,9 +1,10 @@
 locals {
-  tags = {
+  component_tags = {
     "truemark:automation:component-id": "network-parameters"
     "truemark:automation:component-url": "https://registry.terraform.io/modules/truemark/network-parameters/aws/latest",
     "truemark:automation:component-vendor": "TrueMark"
   }
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.component_tags)
   path = "${var.prefix}/${var.name}"
   vpc_path = "${local.path}/vpc"
   azs_path = "${local.path}/azs"
@@ -18,7 +19,7 @@ resource "aws_ssm_parameter" "vpc" {
   name  = local.vpc_path
   type  = "String"
   value = var.vpc_id
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
+  tags = local.tags
 }
 
 resource "aws_ssm_parameter" "azs" {
@@ -26,7 +27,7 @@ resource "aws_ssm_parameter" "azs" {
   name  = local.azs_path
   type  = "StringList"
   value = join(",", var.azs)
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
+  tags = local.tags
 }
 
 resource "aws_ssm_parameter" "public_subnets" {
@@ -34,7 +35,7 @@ resource "aws_ssm_parameter" "public_subnets" {
   name  = local.public_subnets_path
   type  = "StringList"
   value = join(",", var.public_subnet_ids)
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
+  tags = local.tags
 }
 
 resource "aws_ssm_parameter" "private_subnets" {
@@ -42,7 +43,7 @@ resource "aws_ssm_parameter" "private_subnets" {
   name  = local.private_subnets_path
   type  = "StringList"
   value = join(",", var.private_subnet_ids)
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
+  tags = local.tags
 }
 
 resource "aws_ssm_parameter" "public_albs" {
@@ -50,7 +51,7 @@ resource "aws_ssm_parameter" "public_albs" {
   name  = local.public_albs_path
   type  = "StringList"
   value = join(",", var.public_alb_arns)
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
+  tags = local.tags
 }
 
 resource "aws_ssm_parameter" "private_albs" {
@@ -58,7 +59,7 @@ resource "aws_ssm_parameter" "private_albs" {
   name  = local.private_albs_path
   type  = "StringList"
   value = join(",", var.private_alb_arns)
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
+  tags = local.tags
 }
 
 data "aws_ssm_parameters_by_path" "this" {
