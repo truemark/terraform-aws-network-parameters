@@ -1,7 +1,16 @@
+locals {
+  tags = {
+    "truemark:automation:component-id": "network-parameters"
+    "truemark:automation:component-url": "https://registry.terraform.io/modules/truemark/network-parameters/aws/latest",
+    "truemark:automation:component-vendor": "TrueMark"
+  }
+}
+
 resource "aws_ssm_parameter" "vpc" {
   name  = "${var.prefix}/${var.name}/vpc"
   type  = "String"
   value = var.vpc_id
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
 }
 
 resource "aws_ssm_parameter" "azs" {
@@ -9,6 +18,7 @@ resource "aws_ssm_parameter" "azs" {
   name  = "${var.prefix}/${var.name}/azs"
   type  = "StringList"
   value = join(",", var.azs)
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
 }
 
 resource "aws_ssm_parameter" "public_subnets" {
@@ -16,6 +26,7 @@ resource "aws_ssm_parameter" "public_subnets" {
   name  = "${var.prefix}/${var.name}/public_subnets"
   type  = "StringList"
   value = join(",", var.public_subnets)
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
 }
 
 resource "aws_ssm_parameter" "private_subnets" {
@@ -23,6 +34,7 @@ resource "aws_ssm_parameter" "private_subnets" {
   name  = "${var.prefix}/${var.name}/private_subnets"
   type  = "StringList"
   value = join(",", var.private_subnets)
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
 }
 
 resource "aws_ssm_parameter" "private_albs" {
@@ -30,6 +42,7 @@ resource "aws_ssm_parameter" "private_albs" {
   name  = "${var.prefix}/${var.name}/private_albs"
   type  = "StringList"
   value = join(",", var.private_albs)
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
 }
 
 resource "aws_ssm_parameter" "public_albs" {
@@ -37,4 +50,5 @@ resource "aws_ssm_parameter" "public_albs" {
   name  = "${var.prefix}/${var.name}/public_albs"
   type  = "StringList"
   value = join(",", var.public_albs)
+  tags = merge(var.tags, var.suppress_tagging ? {} : local.tags)
 }
