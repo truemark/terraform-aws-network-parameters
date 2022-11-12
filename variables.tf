@@ -33,6 +33,36 @@ variable "private_subnet_ids" {
   default = null
 }
 
+variable "intra_subnet_ids" {
+  description = "Intra subnet IDs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "redshift_subnet_ids" {
+  description = "Redshift subnet IDs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "database_subnet_ids" {
+  description = "Database subnet IDs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "elasticache_subnet_ids" {
+  description = "Elasticache subnet IDs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "outpost_subnet_ids" {
+  description = "Output subnet IDs in this network"
+  type = list(string)
+  default = null
+}
+
 variable "public_alb_arns" {
   description = "Public ALB ARNs in this network"
   type = list(string)

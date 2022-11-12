@@ -86,6 +86,26 @@ output "private_subnet_ids" {
   value = (var.create && var.private_subnet_ids != null) ? var.private_subnet_ids : local.private_subnet_ids
 }
 
+output "intra_subnet_ids" {
+  value = (var.create && var.intra_subnet_ids != null) ? var.intra_subnet_ids : local.intra_subnet_ids
+}
+
+output "redshift_subnet_ids" {
+  value = (var.create && var.redshift_subnet_ids != null) ? var.redshift_subnet_ids : local.redshift_subnet_ids
+}
+
+output "database_subnet_ids" {
+  value = (var.create && var.database_subnet_ids != null) ? var.database_subnet_ids : local.database_subnet_ids
+}
+
+output "elasticache_subnet_ids" {
+  value = (var.create && var.elasticache_subnet_ids != null) ? var.elasticache_subnet_ids : local.elasticache_subnet_ids
+}
+
+output "outpost_subnet_ids" {
+  value = (var.create && var.outpost_subnet_ids != null) ? var.outpost_subnet_ids : local.outpost_subnet_ids
+}
+
 output "public_alb_arns" {
   value = (var.create && var.public_alb_arns != null) ? var.public_alb_arns : local.public_alb_arns
 }
