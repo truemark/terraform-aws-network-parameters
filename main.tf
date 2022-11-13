@@ -19,6 +19,11 @@ locals {
   private_albs_path = "${local.path}/private_albs"
   public_alb_certificates_path = "${local.path}/public_alb_certificates"
   private_alb_certificates_path = "${local.path}/private_alb_certificates"
+  public_certificate_path = "${local.path}/public_certificate"
+  private_certificate_path = "${local.path}/private_certificate"
+  cloudfront_certificate_path = "${local.path}/cloudfront_certificate"
+  public_zone_path = "${local.path}/public_zone"
+  private_zone_path = "${local.path}/private_zone"
 }
 
 resource "aws_ssm_parameter" "vpc" {
@@ -125,6 +130,54 @@ resource "aws_ssm_parameter" "private_alb_certificates" {
   tags = local.tags
 }
 
+resource "aws_ssm_parameter" "public_certificate" {
+  count = var.create && var.public_certificate_arn != null ? 1 : 0
+  name  = local.public_certificate_path
+  type  = "String"
+  value = var.public_certificate_arn
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "private_certificate" {
+  count = var.create && var.private_certificate_arn != null ? 1 : 0
+  name = local.private_certificate_path
+  type  = "String"
+  value = var.private_certificate_arn
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "cloudfront_certificate" {
+  count = var.create && var.cloudfront_certificate_arn != null ? 1 : 0
+  name  = local.cloudfront_certificate_path
+  type  = "String"
+  value = var.cloudfront_certificate_arn
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "public_zone_name" {
+  count = var.create && var.public_zone_name != null ? 1 : 0
+  name  = local.public_zone_path
+  type  = "String"
+  value = var.public_zone_name
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "private_zone_name" {
+  count = var.create && var.private_zone_name != null ? 1 : 0
+  name  = local.private_zone_path
+  type  = "String"
+  value = var.private_zone_name
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "additional" {
+  for_each = var.additional_parameters
+  name  = "${local.path}/${each.key}"
+  type  = "String"
+  value = each.value
+  tags = local.tags
+}
+
 data "aws_ssm_parameters_by_path" "this" {
   path = local.path
 }
@@ -147,4 +200,9 @@ locals {
   private_alb_arns = try(split(",", local.parameter_map[local.private_albs_path]), null)
   public_alb_certificate_arns = try(split(",", local.parameter_map[local.public_alb_certificates_path]), null)
   private_alb_certificate_arns = try(split(",", local.parameter_map[local.private_alb_certificates_path]), null)
+  public_certificate_arn = try(local.parameter_map[local.public_certificate_path], null)
+  private_certificate_arn = try(local.parameter_map[local.private_certificate_path], null)
+  cloudfront_certificate_arn = try(local.parameter_map[local.cloudfront_certificate_path], null)
+  public_zone_name = try(local.parameter_map[local.public_zone_path], null)
+  private_zone_name = try(local.parameter_map[local.private_zone_name], null)
 }

@@ -121,3 +121,23 @@ output "public_alb_certificate_arns" {
 output "private_alb_certificate_arns" {
   value = (var.create && var.private_alb_certificate_arns != null) ? var.private_alb_certificate_arns : local.private_alb_certificate_arns
 }
+
+output "public_certificate_arn" {
+  value = (var.create && var.public_certificate_arn != null) ? var.public_certificate_arn : local.public_certificate_arn
+}
+
+output "private_certificate_arn" {
+  value = (var.create && var.private_certificate_arn != null) ? var.private_certificate_arn : local.private_certificate_arn
+}
+
+output "cloudfront_certificate_arn" {
+  value = (var.create && var.cloudfront_certificate_arn != null) ? var.cloudfront_certificate_arn : local.cloudfront_certificate_arn
+}
+
+output "public_zone_name" {
+  value = (var.create && var.public_zone_name != null) ? var.public_zone_name : local.public_zone_name
+}
+
+output "private_zone_name" {
+  value = (var.create && var.private_zone_name != null) ? var.private_zone_name : local.private_zone_name
+}

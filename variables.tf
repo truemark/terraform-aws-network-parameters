@@ -87,8 +87,44 @@ variable "private_alb_certificate_arns" {
   default = null
 }
 
+variable "public_certificate_arn" {
+  description = "Default public ACM certificate ARN for this network"
+  type = string
+  default = null
+}
+
+variable "private_certificate_arn" {
+  description = "Default private ACM certificate ARN for this network"
+  type = string
+  default = null
+}
+
+variable "cloudfront_certificate_arn" {
+  description = "Default public certificate ARN to be used for CloudFront"
+  type = string
+  default = null
+}
+
+variable "public_zone_name" {
+  description = "Default public route53 zone name for this network"
+  type = string
+  default = null
+}
+
+variable "private_zone_name" {
+  description = "Default private route53 zone name for this network"
+  type = string
+  default = null
+}
+
+variable "additional_parameters" {
+  description = "Additional parameters to store"
+  type = map(string)
+  default = {}
+}
+
 variable "tags" {
-  description = "Tags to apply to resources created by this module."
+  description = "Tags to apply to resources created by this module"
   type = map(string)
   default = {}
 }
