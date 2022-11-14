@@ -19,6 +19,10 @@ locals {
   private_albs_path = "${local.path}/private_albs"
   public_alb_certificates_path = "${local.path}/public_alb_certificates"
   private_alb_certificates_path = "${local.path}/private_alb_certificates"
+  alt_public_albs_path = "${local.path}/alt_public_albs"
+  alt_private_albs_path = "${local.path}/alt_private_albs"
+  alt_public_alb_certificates_path = "${local.path}/alt_public_alb_certificates"
+  alt_private_alb_certificates_path = "${local.path}/alt_private_alb_certificates"
   public_certificate_path = "${local.path}/public_certificate"
   private_certificate_path = "${local.path}/private_certificate"
   cloudfront_certificate_path = "${local.path}/cloudfront_certificate"
@@ -130,6 +134,38 @@ resource "aws_ssm_parameter" "private_alb_certificates" {
   tags = local.tags
 }
 
+resource "aws_ssm_parameter" "alt_public_albs" {
+  cpunt = var.create && var.alt_public_alb_arns != null ? 1 : 0
+  name  = local.alt_public_albs_path
+  type  = "StringList"
+  value = join(",", var.alt_public_alb_arns)
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "alt_private_albs" {
+  count = var.create && var.alt_private_alb_arns != null ? 1 : 0
+  name = local.alt_private_albs_path
+  type  = "StringList"
+  value = join(",", var.alt_private_alb_arns)
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "alt_public_alb_certificates" {
+  count = var.create && var.alt_public_alb_certificate_arns
+  name = local.alt_public_alb_certificates_path
+  type  = "StringList"
+  value = join(",", var.alt_public_alb_certificate_arns)
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "alt_private_alb_certificates" {
+  count = var.create && var.alt_private_alb_certificate_arns
+  name  = local.alt_private_alb_certificates_path
+  type  = "StringList"
+  value = join(",", var.alt_private_alb_certificate_arns)
+  tags = local.tags
+}
+
 resource "aws_ssm_parameter" "public_certificate" {
   count = var.create && var.public_certificate_arn != null ? 1 : 0
   name  = local.public_certificate_path
@@ -200,6 +236,10 @@ locals {
   private_alb_arns = try(split(",", local.parameter_map[local.private_albs_path]), null)
   public_alb_certificate_arns = try(split(",", local.parameter_map[local.public_alb_certificates_path]), null)
   private_alb_certificate_arns = try(split(",", local.parameter_map[local.private_alb_certificates_path]), null)
+  alt_public_alb_arns = try(split(",", local.parameter_map[local.alt_public_albs_path]), null)
+  alt_private_alb_arns = try(split(",", local.parameter_map[local.alt_private_albs_path]), null)
+  alt_public_alb_certificate_arns = try(split(",", local.parameter_map[local.alt_public_alb_certificates_path]), null)
+  alt_private_alb_certificate_arns = try(split(",", local.parameter_map[local.alt_private_alb_certificates_path]), null)
   public_certificate_arn = try(local.parameter_map[local.public_certificate_path], null)
   private_certificate_arn = try(local.parameter_map[local.private_certificate_path], null)
   cloudfront_certificate_arn = try(local.parameter_map[local.cloudfront_certificate_path], null)

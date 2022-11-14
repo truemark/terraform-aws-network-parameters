@@ -87,6 +87,30 @@ variable "private_alb_certificate_arns" {
   default = null
 }
 
+variable "alt_public_alb_arns" {
+  description = "Alternative public ALB ARNs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "alt_private_alb_arns" {
+  description = "Alternative private ALB ARNs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "alt_public_alb_certificate_arns" {
+  description = "Certificate ARNs on alternative public ALBs in this network"
+  type = list(string)
+  default = null
+}
+
+variable "alt_private_alb_certificate_arns" {
+  description = "Certificate ARNs on alternative private ALBs in this network"
+  type = list(string)
+  default = null
+}
+
 variable "public_certificate_arn" {
   description = "Default public ACM certificate ARN for this network"
   type = string

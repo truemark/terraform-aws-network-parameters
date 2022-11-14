@@ -122,6 +122,22 @@ output "private_alb_certificate_arns" {
   value = (var.create && var.private_alb_certificate_arns != null) ? var.private_alb_certificate_arns : local.private_alb_certificate_arns
 }
 
+output "alt_public_alb_arns" {
+  value = (var.create && var.alt_public_alb_arns != null) ? var.alt_public_alb_arns : local.alt_public_alb_arns
+}
+
+output "alt_private_alb_arns" {
+  value = (var.create && var.alt_private_alb_arns != null) ? var.alt_private_alb_arns : local.alt_private_alb_arns
+}
+
+output "alt_public_alb_certificate_arns" {
+  value = (var.create && var.alt_public_alb_certificate_arns != null) ? var.alt_public_alb_certificate_arns : local.alt_public_alb_certificate_arns
+}
+
+output "alt_private_alb_certificate_arns" {
+  value = (var.create && var.alt_private_alb_certificate_arns != null) ? var.alt_private_alb_certificate_arns : local.alt_private_alb_certificate_arns
+}
+
 output "public_certificate_arn" {
   value = (var.create && var.public_certificate_arn != null) ? var.public_certificate_arn : local.public_certificate_arn
 }
