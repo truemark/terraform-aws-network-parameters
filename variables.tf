@@ -141,12 +141,6 @@ variable "private_zone_name" {
   default     = null
 }
 
-variable "additional_parameters" {
-  description = "Additional parameters to store"
-  type        = map(string)
-  default     = {}
-}
-
 variable "tags" {
   description = "Tags to apply to resources created by this module"
   type        = map(string)

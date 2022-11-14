@@ -206,14 +206,6 @@ resource "aws_ssm_parameter" "private_zone_name" {
   tags  = local.tags
 }
 
-resource "aws_ssm_parameter" "additional" {
-  for_each = var.additional_parameters
-  name     = "${local.path}/${each.key}"
-  type     = "String"
-  value    = each.value
-  tags     = local.tags
-}
-
 data "aws_ssm_parameters_by_path" "this" {
   path = local.path
 }
