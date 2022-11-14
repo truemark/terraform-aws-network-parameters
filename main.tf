@@ -135,7 +135,7 @@ resource "aws_ssm_parameter" "private_alb_certificates" {
 }
 
 resource "aws_ssm_parameter" "alt_public_albs" {
-  cpunt = var.create && var.alt_public_alb_arns != null ? 1 : 0
+  count = var.create && var.alt_public_alb_arns != null ? 1 : 0
   name  = local.alt_public_albs_path
   type  = "StringList"
   value = join(",", var.alt_public_alb_arns)
