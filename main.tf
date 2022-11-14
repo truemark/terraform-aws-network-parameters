@@ -236,5 +236,5 @@ locals {
   private_certificate_arn          = try(local.parameter_map[local.private_certificate_path], null)
   cloudfront_certificate_arn       = try(local.parameter_map[local.cloudfront_certificate_path], null)
   public_zone_name                 = try(local.parameter_map[local.public_zone_path], null)
-  private_zone_name                = try(local.parameter_map[local.private_zone_name], null)
+  private_zone_name                = try(local.parameter_map[local.private_zone_path], null)
 }
