@@ -1,33 +1,33 @@
 locals {
   component_tags = {
-    "truemark:automation:component-id": "network-parameters"
-    "truemark:automation:component-url": "https://registry.terraform.io/modules/truemark/network-parameters/aws/latest",
-    "truemark:automation:component-vendor": "TrueMark"
+    "truemark:automation:component-id" : "network-parameters"
+    "truemark:automation:component-url" : "https://registry.terraform.io/modules/truemark/network-parameters/aws/latest",
+    "truemark:automation:component-vendor" : "TrueMark"
   }
-  tags = merge(var.tags, var.suppress_tagging ? {} : local.component_tags)
-  path = "${var.prefix}/${var.name}"
-  vpc_path = "${local.path}/vpc"
-  azs_path = "${local.path}/azs"
-  public_subnets_path = "${local.path}/public_subnets"
-  private_subnets_path = "${local.path}/private_subnets"
-  intra_subnets_path = "${local.path}/intra_subnets"
-  redshift_subnets_path = "${local.path}/redshift_subnets"
-  database_subnets_path = "${local.path}/database_subnets"
-  elasticache_subnets_path = "${local.path}/elasticache_subnets"
-  outpost_subnets_path = "${local.path}/outpost_subnets"
-  public_albs_path = "${local.path}/public_albs"
-  private_albs_path = "${local.path}/private_albs"
-  public_alb_certificates_path = "${local.path}/public_alb_certificates"
-  private_alb_certificates_path = "${local.path}/private_alb_certificates"
-  alt_public_albs_path = "${local.path}/alt_public_albs"
-  alt_private_albs_path = "${local.path}/alt_private_albs"
-  alt_public_alb_certificates_path = "${local.path}/alt_public_alb_certificates"
+  tags                              = merge(var.tags, var.suppress_tagging ? {} : local.component_tags)
+  path                              = "${var.prefix}/${var.name}"
+  vpc_path                          = "${local.path}/vpc"
+  azs_path                          = "${local.path}/azs"
+  public_subnets_path               = "${local.path}/public_subnets"
+  private_subnets_path              = "${local.path}/private_subnets"
+  intra_subnets_path                = "${local.path}/intra_subnets"
+  redshift_subnets_path             = "${local.path}/redshift_subnets"
+  database_subnets_path             = "${local.path}/database_subnets"
+  elasticache_subnets_path          = "${local.path}/elasticache_subnets"
+  outpost_subnets_path              = "${local.path}/outpost_subnets"
+  public_albs_path                  = "${local.path}/public_albs"
+  private_albs_path                 = "${local.path}/private_albs"
+  public_alb_certificates_path      = "${local.path}/public_alb_certificates"
+  private_alb_certificates_path     = "${local.path}/private_alb_certificates"
+  alt_public_albs_path              = "${local.path}/alt_public_albs"
+  alt_private_albs_path             = "${local.path}/alt_private_albs"
+  alt_public_alb_certificates_path  = "${local.path}/alt_public_alb_certificates"
   alt_private_alb_certificates_path = "${local.path}/alt_private_alb_certificates"
-  public_certificate_path = "${local.path}/public_certificate"
-  private_certificate_path = "${local.path}/private_certificate"
-  cloudfront_certificate_path = "${local.path}/cloudfront_certificate"
-  public_zone_path = "${local.path}/public_zone"
-  private_zone_path = "${local.path}/private_zone"
+  public_certificate_path           = "${local.path}/public_certificate"
+  private_certificate_path          = "${local.path}/private_certificate"
+  cloudfront_certificate_path       = "${local.path}/cloudfront_certificate"
+  public_zone_path                  = "${local.path}/public_zone"
+  private_zone_path                 = "${local.path}/private_zone"
 }
 
 resource "aws_ssm_parameter" "vpc" {
@@ -35,7 +35,7 @@ resource "aws_ssm_parameter" "vpc" {
   name  = local.vpc_path
   type  = "String"
   value = var.vpc_id
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "azs" {
@@ -43,7 +43,7 @@ resource "aws_ssm_parameter" "azs" {
   name  = local.azs_path
   type  = "StringList"
   value = join(",", var.azs)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "public_subnets" {
@@ -51,7 +51,7 @@ resource "aws_ssm_parameter" "public_subnets" {
   name  = local.public_subnets_path
   type  = "StringList"
   value = join(",", var.public_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "private_subnets" {
@@ -59,7 +59,7 @@ resource "aws_ssm_parameter" "private_subnets" {
   name  = local.private_subnets_path
   type  = "StringList"
   value = join(",", var.private_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "intra_subnets" {
@@ -67,7 +67,7 @@ resource "aws_ssm_parameter" "intra_subnets" {
   name  = local.intra_subnets_path
   type  = "StringList"
   value = join(",", var.intra_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "redshift_subnets" {
@@ -75,7 +75,7 @@ resource "aws_ssm_parameter" "redshift_subnets" {
   name  = local.redshift_subnets_path
   type  = "StringList"
   value = join(",", var.redshift_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "database_subnets" {
@@ -83,7 +83,7 @@ resource "aws_ssm_parameter" "database_subnets" {
   name  = local.database_subnets_path
   type  = "StringList"
   value = join(",", var.database_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "elasticache_subnets" {
@@ -91,7 +91,7 @@ resource "aws_ssm_parameter" "elasticache_subnets" {
   name  = local.elasticache_subnets_path
   type  = "StringList"
   value = join(",", var.elasticache_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "outpost_subnets" {
@@ -99,7 +99,7 @@ resource "aws_ssm_parameter" "outpost_subnets" {
   name  = local.outpost_subnets_path
   type  = "StringList"
   value = join(",", var.outpost_subnet_ids)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "public_albs" {
@@ -107,7 +107,7 @@ resource "aws_ssm_parameter" "public_albs" {
   name  = local.public_albs_path
   type  = "StringList"
   value = join(",", var.public_alb_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "private_albs" {
@@ -115,7 +115,7 @@ resource "aws_ssm_parameter" "private_albs" {
   name  = local.private_albs_path
   type  = "StringList"
   value = join(",", var.private_alb_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "public_alb_certificates" {
@@ -123,15 +123,15 @@ resource "aws_ssm_parameter" "public_alb_certificates" {
   name  = local.public_alb_certificates_path
   type  = "StringList"
   value = join(",", var.public_alb_certificate_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "private_alb_certificates" {
   count = var.create && var.private_alb_certificate_arns != null ? 1 : 0
   name  = local.private_alb_certificates_path
-  type = "StringList"
+  type  = "StringList"
   value = join(",", var.private_alb_certificate_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "alt_public_albs" {
@@ -139,23 +139,23 @@ resource "aws_ssm_parameter" "alt_public_albs" {
   name  = local.alt_public_albs_path
   type  = "StringList"
   value = join(",", var.alt_public_alb_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "alt_private_albs" {
   count = var.create && var.alt_private_alb_arns != null ? 1 : 0
-  name = local.alt_private_albs_path
+  name  = local.alt_private_albs_path
   type  = "StringList"
   value = join(",", var.alt_private_alb_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "alt_public_alb_certificates" {
   count = var.create && var.alt_public_alb_certificate_arns
-  name = local.alt_public_alb_certificates_path
+  name  = local.alt_public_alb_certificates_path
   type  = "StringList"
   value = join(",", var.alt_public_alb_certificate_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "alt_private_alb_certificates" {
@@ -163,7 +163,7 @@ resource "aws_ssm_parameter" "alt_private_alb_certificates" {
   name  = local.alt_private_alb_certificates_path
   type  = "StringList"
   value = join(",", var.alt_private_alb_certificate_arns)
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "public_certificate" {
@@ -171,15 +171,15 @@ resource "aws_ssm_parameter" "public_certificate" {
   name  = local.public_certificate_path
   type  = "String"
   value = var.public_certificate_arn
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "private_certificate" {
   count = var.create && var.private_certificate_arn != null ? 1 : 0
-  name = local.private_certificate_path
+  name  = local.private_certificate_path
   type  = "String"
   value = var.private_certificate_arn
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "cloudfront_certificate" {
@@ -187,7 +187,7 @@ resource "aws_ssm_parameter" "cloudfront_certificate" {
   name  = local.cloudfront_certificate_path
   type  = "String"
   value = var.cloudfront_certificate_arn
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "public_zone_name" {
@@ -195,7 +195,7 @@ resource "aws_ssm_parameter" "public_zone_name" {
   name  = local.public_zone_path
   type  = "String"
   value = var.public_zone_name
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "private_zone_name" {
@@ -203,15 +203,15 @@ resource "aws_ssm_parameter" "private_zone_name" {
   name  = local.private_zone_path
   type  = "String"
   value = var.private_zone_name
-  tags = local.tags
+  tags  = local.tags
 }
 
 resource "aws_ssm_parameter" "additional" {
   for_each = var.additional_parameters
-  name  = "${local.path}/${each.key}"
-  type  = "String"
-  value = each.value
-  tags = local.tags
+  name     = "${local.path}/${each.key}"
+  type     = "String"
+  value    = each.value
+  tags     = local.tags
 }
 
 data "aws_ssm_parameters_by_path" "this" {
@@ -220,29 +220,29 @@ data "aws_ssm_parameters_by_path" "this" {
 
 locals {
   parameter_map = tomap({
-    for i, name in data.aws_ssm_parameters_by_path.this.names:
+    for i, name in data.aws_ssm_parameters_by_path.this.names :
     name => nonsensitive(data.aws_ssm_parameters_by_path.this.values[i])
   })
-  vpc_id = try(local.parameter_map[local.vpc_path], null)
-  azs = try(split(",", local.parameter_map[local.azs_path]), null)
-  public_subnet_ids = try(split(",", local.parameter_map[local.public_subnets_path]), null)
-  private_subnet_ids = try(split(",", local.parameter_map[local.private_subnets_path]), null)
-  intra_subnet_ids = try(split(",", local.parameter_map[local.intra_subnets_path]), null)
-  redshift_subnet_ids = try(split(",", local.parameter_map[local.redshift_subnets_path]), null)
-  database_subnet_ids = try(split(",", local.parameter_map[local.database_subnets_path]), null)
-  elasticache_subnet_ids = try(split(",", local.parameter_map[local.elasticache_subnets_path]), null)
-  outpost_subnet_ids = try(split(",", local.parameter_map[local.outpost_subnets_path]), null)
-  public_alb_arns = try(split(",", local.parameter_map[local.public_albs_path]), null)
-  private_alb_arns = try(split(",", local.parameter_map[local.private_albs_path]), null)
-  public_alb_certificate_arns = try(split(",", local.parameter_map[local.public_alb_certificates_path]), null)
-  private_alb_certificate_arns = try(split(",", local.parameter_map[local.private_alb_certificates_path]), null)
-  alt_public_alb_arns = try(split(",", local.parameter_map[local.alt_public_albs_path]), null)
-  alt_private_alb_arns = try(split(",", local.parameter_map[local.alt_private_albs_path]), null)
-  alt_public_alb_certificate_arns = try(split(",", local.parameter_map[local.alt_public_alb_certificates_path]), null)
+  vpc_id                           = try(local.parameter_map[local.vpc_path], null)
+  azs                              = try(split(",", local.parameter_map[local.azs_path]), null)
+  public_subnet_ids                = try(split(",", local.parameter_map[local.public_subnets_path]), null)
+  private_subnet_ids               = try(split(",", local.parameter_map[local.private_subnets_path]), null)
+  intra_subnet_ids                 = try(split(",", local.parameter_map[local.intra_subnets_path]), null)
+  redshift_subnet_ids              = try(split(",", local.parameter_map[local.redshift_subnets_path]), null)
+  database_subnet_ids              = try(split(",", local.parameter_map[local.database_subnets_path]), null)
+  elasticache_subnet_ids           = try(split(",", local.parameter_map[local.elasticache_subnets_path]), null)
+  outpost_subnet_ids               = try(split(",", local.parameter_map[local.outpost_subnets_path]), null)
+  public_alb_arns                  = try(split(",", local.parameter_map[local.public_albs_path]), null)
+  private_alb_arns                 = try(split(",", local.parameter_map[local.private_albs_path]), null)
+  public_alb_certificate_arns      = try(split(",", local.parameter_map[local.public_alb_certificates_path]), null)
+  private_alb_certificate_arns     = try(split(",", local.parameter_map[local.private_alb_certificates_path]), null)
+  alt_public_alb_arns              = try(split(",", local.parameter_map[local.alt_public_albs_path]), null)
+  alt_private_alb_arns             = try(split(",", local.parameter_map[local.alt_private_albs_path]), null)
+  alt_public_alb_certificate_arns  = try(split(",", local.parameter_map[local.alt_public_alb_certificates_path]), null)
   alt_private_alb_certificate_arns = try(split(",", local.parameter_map[local.alt_private_alb_certificates_path]), null)
-  public_certificate_arn = try(local.parameter_map[local.public_certificate_path], null)
-  private_certificate_arn = try(local.parameter_map[local.private_certificate_path], null)
-  cloudfront_certificate_arn = try(local.parameter_map[local.cloudfront_certificate_path], null)
-  public_zone_name = try(local.parameter_map[local.public_zone_path], null)
-  private_zone_name = try(local.parameter_map[local.private_zone_name], null)
+  public_certificate_arn           = try(local.parameter_map[local.public_certificate_path], null)
+  private_certificate_arn          = try(local.parameter_map[local.private_certificate_path], null)
+  cloudfront_certificate_arn       = try(local.parameter_map[local.cloudfront_certificate_path], null)
+  public_zone_name                 = try(local.parameter_map[local.public_zone_path], null)
+  private_zone_name                = try(local.parameter_map[local.private_zone_name], null)
 }
