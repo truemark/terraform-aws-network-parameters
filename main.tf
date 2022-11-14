@@ -151,7 +151,7 @@ resource "aws_ssm_parameter" "alt_private_albs" {
 }
 
 resource "aws_ssm_parameter" "alt_public_alb_certificates" {
-  count = var.create && var.alt_public_alb_certificate_arns
+  count = var.create && var.alt_public_alb_certificate_arns != null ? 1 : 0
   name  = local.alt_public_alb_certificates_path
   type  = "StringList"
   value = join(",", var.alt_public_alb_certificate_arns)
@@ -159,7 +159,7 @@ resource "aws_ssm_parameter" "alt_public_alb_certificates" {
 }
 
 resource "aws_ssm_parameter" "alt_private_alb_certificates" {
-  count = var.create && var.alt_private_alb_certificate_arns
+  count = var.create && var.alt_private_alb_certificate_arns != null ? 1 : 0
   name  = local.alt_private_alb_certificates_path
   type  = "StringList"
   value = join(",", var.alt_private_alb_certificate_arns)
